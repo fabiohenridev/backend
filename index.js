@@ -62,7 +62,7 @@ app.delete('/user', (req, res) => {
 
 // Rota para download do arquivo
 app.get('/download', (req, res) => {
-  const filePath = path.join(__dirname, 'arquivos', 'meuarquivo.pdf'); // Ajuste conforme o caminho real
+  const filePath = path.join(__dirname, 'Arquivos', 'ganharOnline.pdf'); // Ajuste conforme o caminho real
   const fileStat = fs.statSync(filePath); // Obter o tamanho do arquivo
 
   // Definindo os cabeçalhos corretamente
