@@ -62,22 +62,22 @@ app.delete('/user', (req, res) => {
 
 // Rota para download do arquivo
 app.get('/download', (req, res) => {
-  const filePath = path.join(__dirname, 'arquivos', 'ganharOnline.pdf'); // Ajuste conforme o caminho real
-  const fileStat = fs.statSync(filePath); // Obter o tamanho do arquivo
+  const filePath = path.join(__dirname, 'arquivos', 'ganharOnline.pdf'); // Caminho para o arquivo
 
-  // Definindo os cabeçalhos corretamente
-  res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', 'attachment; filename=meuarquivo.pdf');
-  res.setHeader('Content-Length', fileStat.size);  // Cabeçalho Content-Length
-
-  // Enviando o arquivo
+  // Verifica se o arquivo existe
   res.sendFile(filePath, (err) => {
     if (err) {
       console.error("Erro ao tentar baixar o arquivo:", err);
       res.status(500).send("Erro ao tentar baixar o arquivo");
     }
   });
+
+  // Definindo os cabeçalhos para forçar o download
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'attachment; filename=meuarquivo.pdf');
 });
+
+
 
 // Testar rota para usuários
 app.get('/', (req, res) => {
