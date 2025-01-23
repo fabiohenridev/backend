@@ -57,21 +57,22 @@ db.query(query, [nome, email], (err, result)=>{
 
 })
 
-
-app.get('/download', (req, res)=>{
-
-
-const filePath = path.join(__dirname, 'Arquivos', 'ganharOnline.pdf');
-
-res.download(filePath, (err)=>{
-    if(err){
-        console.error('erro ao baixar arquivo', err);
-        res.send('erro ao tentar baixar arquivo')
-    }
-})
-
-
-})
+app.get('/download', (req, res) => {
+    // Caminho para o arquivo
+    const filePath = path.join(__dirname, 'arquivos', 'meuarquivo.pdf'); // Exemplo para PDF
+  
+    // Define o tipo de conteúdo corretamente para o arquivo (PDF, imagens, etc.)
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'attachment; filename=meuarquivo.pdf');
+  
+    // Envia o arquivo
+    res.sendFile(filePath, (err) => {
+      if (err) {
+        console.error("Erro ao tentar baixar o arquivo:", err);
+        res.status(500).send("Erro ao tentar baixar o arquivo");
+      }
+    });
+  });
 
 // a rota delete é a mesma coisa da rota post. A diferença é o comando sql
 
